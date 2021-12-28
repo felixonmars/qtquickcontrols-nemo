@@ -1,4 +1,4 @@
-*.pro.user
+*.user
 *.pyc
 .directory
 *.o
@@ -13,4 +13,5 @@ examples/touch/glacier-components
 Makefile
 installroot/
 RPMS/
+build/
 debug*.list

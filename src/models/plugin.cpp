@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Chupligin Sergey <neochapay@gmail.com>
+ * Copyright (C) 2017-2021 Chupligin Sergey <neochapay@gmail.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -40,7 +40,7 @@ public:
     void registerTypes(const char *uri)
     {
         Q_ASSERT(uri == QLatin1String("Nemo.UX.Models") || uri == QLatin1String("org.nemomobile.uxmodels"));
-        qmlRegisterType<CalendarModel>(uri, 1, 0, "CalendarModel");
+        qmlRegisterType<CalendarModel>(uri, 2, 0, "CalendarModel");
     }
 };
 

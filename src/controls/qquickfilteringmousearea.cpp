@@ -45,20 +45,20 @@ void QQuickFilteringMouseArea::mouseMoveEvent(QMouseEvent *event) {
     //so it's not a good measure of the fact that we want to swipe
     //grabMouse();
 
-    setDeltaPos(QPointF(event->windowPos().x() - pressPos().x(), event->windowPos().y() - pressPos().y()));
-    if (event->windowPos().x() - pressPos().x() > swipingThreshold()) setSwipingX(true);
-    if (event->windowPos().y() - pressPos().y() > swipingThreshold()) setSwipingY(true);
-    setPosition(event->localPos());
+    setDeltaPos(QPointF(event->scenePosition().x() - pressPos().x(), event->scenePosition().y() - pressPos().y()));
+    if (event->scenePosition().x() - pressPos().x() > swipingThreshold()) setSwipingX(true);
+    if (event->scenePosition().y() - pressPos().y() > swipingThreshold()) setSwipingY(true);
+    setPosition(event->position());
 }
 
 void QQuickFilteringMouseArea::mousePressEvent(QMouseEvent *event) {
     if (!isEnabled() || !(event->button() & acceptedMouseButtons())) {
         QQuickItem::mousePressEvent(event);
     } else {
-        setPressPos(event->windowPos());
-        emit pressed(event->localPos());
+        setPressPos(event->scenePosition());
+        emit pressed(event->position());
         setPressed(true);
-        setPosition(event->localPos());
+        setPosition(event->position());
     }
 }
 
@@ -68,7 +68,7 @@ void QQuickFilteringMouseArea::mouseReleaseEvent(QMouseEvent *event) {
     } else {
         QQuickWindow *w = window();
         if (w && w->mouseGrabberItem() == this && m_pressed){
-            emit released(event->localPos());
+            emit released(event->position());
             mouseUngrabEvent();
         }
     }
@@ -77,12 +77,12 @@ void QQuickFilteringMouseArea::mouseReleaseEvent(QMouseEvent *event) {
 bool QQuickFilteringMouseArea::sendMouseEvent(QQuickItem *item, QMouseEvent *event) {
     Q_UNUSED(item);
 
-    QPointF localPos = mapFromScene(event->windowPos());
+    QPointF localPos = mapFromScene(event->position());
     QQuickWindow *c = window();
     QQuickItem *grabber = c ? c->mouseGrabberItem() : 0;
 
     if ((contains(localPos)) && (!grabber || !grabber->keepMouseGrab())) {
-        QMouseEvent mouseEvent(event->type(), localPos, event->windowPos(), event->screenPos(),
+        QMouseEvent mouseEvent(event->type(), localPos, event->scenePosition(), event->globalPosition(),
                                event->button(), event->buttons(), event->modifiers());
         mouseEvent.setAccepted(false);
 

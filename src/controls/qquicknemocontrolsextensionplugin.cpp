@@ -32,10 +32,10 @@
 #include "theme.h"
 #include "nemofocussingleton.h"
 
-QQuickNemoControlsExtensionPlugin::QQuickNemoControlsExtensionPlugin(QObject *parent) :
+/*QQuickNemoControlsExtensionPlugin::QQuickNemoControlsExtensionPlugin(QObject *parent) :
     QQmlExtensionPlugin(parent)
 {
-}
+}*/
 
 static QObject *nemo_hacks_singletontype_provider(QQmlEngine *engine, QJSEngine */*scriptEngine*/)
 {
@@ -53,13 +53,13 @@ QObject *getNemoFocus(QQmlEngine *engine, QJSEngine *scriptEngine)
 void QQuickNemoControlsExtensionPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("QtQuick.Controls.Nemo"));
-    qmlRegisterModule(uri, 1, 0);
-    qmlRegisterSingletonType<QObject>(uri, 1, 0, "NemoFocus", getNemoFocus);
-    qmlRegisterSingletonType<QObject>(uri, 1, 0, "NemoHacks", nemo_hacks_singletontype_provider);
-    qmlRegisterType<NemoWindow>(uri, 1, 0, "NemoWindow");
-    qmlRegisterType<NemoPage>(uri, 1, 0, "NemoPage");
-    qmlRegisterType<RingIndicator>(uri, 1, 0, "RingIndicator");
-    qmlRegisterType<QQuickFilteringMouseArea>(uri, 1, 0, "FilteringMouseArea");
+
+    qmlRegisterSingletonType<QObject>(uri, 2, 0, "NemoFocus", getNemoFocus);
+    qmlRegisterSingletonType<QObject>(uri, 2, 0, "NemoHacks", nemo_hacks_singletontype_provider);
+    qmlRegisterType<NemoWindow>(uri, 2, 0, "NemoWindow");
+    qmlRegisterType<NemoPage>(uri, 2, 0, "NemoPage");
+    qmlRegisterType<RingIndicator>(uri, 2, 0, "RingIndicator");
+    qmlRegisterType<QQuickFilteringMouseArea>(uri, 2, 0, "FilteringMouseArea");
 }
 
 void QQuickNemoControlsExtensionPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

@@ -22,14 +22,13 @@
 #define QQUICKNEMOCONTROLSEXTENSIONPLUGIN_H
 
 #include <QQmlExtensionPlugin>
-
 class QQuickNemoControlsExtensionPlugin : public QQmlExtensionPlugin
 {
 public:
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
+    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
 public:
-    explicit QQuickNemoControlsExtensionPlugin(QObject *parent = 0);
+    //explicit QQuickNemoControlsExtensionPlugin(QObject *parent = 0);
     void registerTypes(const char *uri);
     void initializeEngine(QQmlEngine *engine, const char *uri);
 };
